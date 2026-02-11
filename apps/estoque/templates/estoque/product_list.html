@@ -50,62 +50,7 @@
                 </tr>
             </thead>
             <tbody id="product-table-body" class="divide-y divide-slate-700">
-                {% for product in products %}
-                <tr class="hover:bg-slate-800/30 transition-colors group">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            <div class="h-10 w-10 flex-shrink-0 bg-slate-700 rounded-lg flex items-center justify-center text-slate-400 font-bold">
-                                {{ product.name|slice:":1"|upper }}
-                            </div>
-                            <div class="ml-4">
-                                <div class="text-sm font-medium text-white">{{ product.name }}</div>
-                                <div class="text-xs text-slate-500">ID: #{{ product.id }}</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-slate-300 font-mono">{{ product.sku|default:"---" }}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                            {{ product.category.name }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-right text-white font-semibold">
-                        R$ {{ product.price }}
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        <div class="text-sm {% if product.stock_quantity < 10 %}text-rose-400{% else %}text-emerald-400{% endif %} font-bold">
-                            {{ product.stock_quantity }}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-center">
-                        {% if product.stock_quantity > 0 %}
-                            <span class="flex items-center justify-center gap-1.5 text-xs font-medium text-emerald-500">
-                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Ativo
-                            </span>
-                        {% else %}
-                            <span class="flex items-center justify-center gap-1.5 text-xs font-medium text-rose-500">
-                                <span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span> Esgotado
-                            </span>
-                        {% endif %}
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <a href="#" class="p-2 bg-slate-700 hover:bg-amber-500/20 hover:text-amber-500 rounded-lg transition-colors" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="p-2 bg-slate-700 hover:bg-rose-500/20 hover:text-rose-500 rounded-lg transition-colors" title="Excluir">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="7" class="px-6 py-12 text-center text-slate-500 italic">
-                        Nenhum produto cadastrado no momento.
-                    </td>
-                </tr>
-                {% endfor %}
+                {% include "estoque/partials/product_table.html" %}
             </tbody>
         </table>
     </div>

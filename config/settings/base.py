@@ -84,3 +84,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Adicione ou verifique estas linhas
+LOGIN_URL = '/admin/login/'  # Ou sua rota de login customizada
+LOGIN_REDIRECT_URL = '/estoque/produtos/'
