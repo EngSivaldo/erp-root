@@ -9,10 +9,15 @@
         <p class="text-slate-400 text-sm">Gerencie o inventário, preços e categorias do seu ERP.</p>
     </div>
     <div>
-        <a href="#" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-semibold transition-all shadow-lg shadow-emerald-900/20">
-            <i class="fas fa-plus"></i> Novo Produto
-        </a>
-    </div>
+      <button 
+          hx-get="{% url 'product_create' %}" 
+          hx-target="#modal-container" 
+          hx-trigger="click"
+          class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-semibold transition-all shadow-lg shadow-emerald-900/20">
+          <i class="fas fa-plus"></i> Novo Produto
+      </button>
+  </div>
+  <div id="modal-container"></div>
 </div>
 
 <div class="bg-[#1e293b] p-4 rounded-xl border border-slate-700 mb-6 flex flex-wrap gap-4 items-center">
@@ -44,7 +49,7 @@
                     <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-400 text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700">
+            <tbody id="product-table-body" class="divide-y divide-slate-700">
                 {% for product in products %}
                 <tr class="hover:bg-slate-800/30 transition-colors group">
                     <td class="px-6 py-4">

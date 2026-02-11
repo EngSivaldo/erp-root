@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import product_list
-
-app_name = 'estoque'
+from . import views
 
 urlpatterns = [
-    path('produtos/', product_list, name='product_list'),
+    path('produtos/', views.product_list, name='product_list'),
+    path('produtos/novo/', views.product_upsert, name='product_create'),
+    path('produtos/editar/<int:pk>/', views.product_upsert, name='product_edit'),
+    path('produtos/excluir/<int:pk>/', views.product_delete, name='product_delete'),
 ]

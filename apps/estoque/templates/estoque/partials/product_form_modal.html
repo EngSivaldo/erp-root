@@ -1,0 +1,29 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+  <div class="bg-[#1e293b] w-full max-w-lg rounded-2xl border border-slate-700 shadow-2xl p-6">
+      <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-bold text-white">
+              {% if product %}Editar{% else %}Novo{% endif %} Produto
+          </h3>
+          <button onclick="this.closest('.fixed').remove()" class="text-slate-400 hover:text-white">
+              <i class="fas fa-times"></i>
+          </button>
+      </div>
+
+      <form hx-post="{% if product %}{% url 'product_edit' product.pk %}{% else %}{% url 'product_create' %}{% endif %}" 
+            hx-target="#product-table-body" 
+            hx-swap="innerHTML"
+            onsubmit="setTimeout(() => this.closest('.fixed').remove(), 500)">
+          {% csrf_token %}
+          <div class="space-y-4">
+              {{ form.as_p }}
+          </div>
+          
+          <div class="mt-8 flex justify-end gap-3">
+              <button type="button" onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-slate-400 hover:text-white">Cancelar</button>
+              <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-lg font-bold">
+                  Salvar Produto
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
