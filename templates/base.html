@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP Modular - Sênior</title>
+    <title>Sênior ERP - {% block title %}{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans">
-    <nav class="bg-gray-800 border-b border-gray-700 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-emerald-400">Sênior ERP</h1>
-            <div class="space-x-4">
-                <a href="#" class="hover:text-emerald-400 transition">Estoque</a>
-                <a href="#" class="hover:text-emerald-400 transition">Financeiro</a>
+<body class="bg-[#0f172a] text-slate-200 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-[#1e293b] border-r border-slate-700 hidden md:flex flex-col">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-emerald-400 flex items-center gap-2">
+                    <i class="fas fa-layer-group"></i> Sênior ERP
+                </h2>
             </div>
-        </div>
-    </nav>
+            <nav class="flex-1 px-4 space-y-2">
+                <a href="{% url 'home' %}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-chart-line w-5"></i> Dashboard
+                </a>
+                <a href="/estoque/produtos/" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-boxes w-5"></i> Estoque
+                </a>
+                <a href="/admin/" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-user-shield w-5"></i> Admin
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-700 text-xs text-slate-500">
+                Logado como: <span class="text-slate-300 font-medium">{{ user.username }}</span>
+            </div>
+        </aside>
 
-    <main class="container mx-auto p-6">
-        {% block content %}{% endblock %}
-    </main>
+        <main class="flex-1 overflow-y-auto bg-[#0f172a] p-8">
+            <div class="max-w-7xl mx-auto">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
 </body>
 </html>

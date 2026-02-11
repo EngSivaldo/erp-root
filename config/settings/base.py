@@ -1,19 +1,19 @@
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 
+# BASE_DIR aponta para a raiz 'erp_root'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Adiciona a pasta 'apps' ao path do Python para facilitar os imports
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+# Adiciona a pasta 'apps' ao path do Python de forma absoluta
+APPS_DIR = os.path.join(BASE_DIR, 'apps')
+sys.path.insert(0, APPS_DIR)
 
 SECRET_KEY = 'django-insecure-muda-isso-em-producao'
-
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
-# Apps do Sistema (Separados por Categoria)
+# Apps do Sistema
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +46,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Middleware de Tenant customizado
     'core.middleware.TenantMiddleware',
 ]
 
@@ -68,12 +67,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.CustomUser'
-
-# Outras configurações omitidas para brevidade (Static, Media, etc.)
-
-
-# config/settings/base.py
+WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -81,3 +75,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = 'core.CustomUser'
+
+# Configurações de Arquivos Estáticos (Essencial para Tailwind)
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
